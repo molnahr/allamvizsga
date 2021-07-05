@@ -1,0 +1,61 @@
+{% extends "blog/base.html" %} 
+{% block content %}
+<br>
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+				<form method="get">
+			</form>
+					<table class="table table-hover" id="myTable">
+					<thead class="thead-dark">
+						<tr>
+							<th>Cím</th>
+							<th>Szint</th>
+							<th>Típus</th>
+							<th>Pont</th>
+							<th>Kidolgozás</th>
+							<th>Megoldás</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for i in Exercises %}
+							<tr>
+								<td>{{i.title}}</td>
+								<td>{{i.level}}</td>
+								<td>{{i.exercise_type}}</td>
+                				<td>{{i.score}}</td>
+								<td><a class="btn btn-sm btn-info" href="{% url 'solve_exercise' i.id %}">Kidolgozás</a></td>
+								<td><a class="btn btn-sm btn-warning" href="{% url 'exercise_answer' i.id %}">Megoldás</a></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable( {
+		paging: true,
+        pagingType: "full_numbers",
+        searching: true,
+        autoWidth: true,
+		oLanguage: {
+			oPaginate: {
+			sNext: 'Következő',
+			sPrevious: 'Előző',
+			sLast: 'Utolsó',
+			sFirst: 'Első', 
+		},
+		sZeroRecords: "Nem található ilyen feladat",
+		sLengthMenu: "Elemek száma oldalanként: _MENU_ ",
+		sInfo: "Oldal: _PAGE_/_PAGES_",
+		sInfoEmpty: "Nem található ilyen feladat a mezők között! ",
+		sInfoFiltered: "(Keresés mind a  _MAX_ bejegyzés között)",
+		sSearch: 'Keresés',
+    },
+    } );
+} );
+</script>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %} 
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-body"> 
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <article class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2"  href="{% url 'student_profile' profile.id %}">{{profile.name}}</a>
+                  <small class="text-muted">{{ answer.date_created|date:"Y/m/d"}} {{ answer.date_created|time:"H:i" }}</small>
+                  {% if answer.score > -1 %}
+                  <small class="text-muted float-right mr-1" href="#">Elért pontszám: {{ answer.score }}</small>
+                  {% else %}
+                  <small class="text-muted float-right mr-1" href="#">Nincsen lepontozva</small>
+                  {% endif %}
+                </div>
+                {{ answer.media }}
+                <h2><a class="article-title" href="#">{{ answer.title }}</a></h2>
+                <p class="article-content">{{ answer.answer|safe }}</p> 
+              </div>
+            </article>
+        </fieldset>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p}}
+                <input type="submit" name="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

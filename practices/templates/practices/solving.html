@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+   <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h1 class="text-center">{{ Exercise.title }}</h1>
+              <div class="row-6">
+              <small class="text-muted" href="#">Feladat szintje: {{ Exercise.level }}</small>
+              </div>
+               <div class="row-6">
+              <small class="text-muted" href="#">Feladat típusa: {{ Exercise.exercise_type }}</small>
+                </div>
+              <div class="row-6">
+              <small class="text-muted" href="#">Elérhető maximum pontszám: {{ Exercise.score }}</small>
+             </div>
+            </div>
+            <div class="article-metadata">
+            <br>
+             <p class="article-content">{{ Exercise.description|safe }}</p>
+             </div>
+        <br>
+        
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ Solve.media }}
+                {{ Solve.as_p }}
+                <input class="btn btn-outline-success  btn" type="submit" name="Submit">
+            </form>
+            </div>
+        </div>
+ </article>
+   
+{% endblock content %}

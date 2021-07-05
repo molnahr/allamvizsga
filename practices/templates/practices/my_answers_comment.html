@@ -1,0 +1,44 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+<div class="col-md-6">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <article class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2" href="#">A tanár álltali kiértékelő</a>
+                </div>
+                {{ answer.media }}
+                <h2><a class="article-title" href="#">{{ answer.title }}</a></h2>
+                <p class="article-content">{{ answer.comment|safe }}</p> 
+              </div>
+            </article>
+        </fieldset>
+  </div>
+
+
+<div class="col-md-6">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <article class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2"  href="{% url 'student_profile' profile.id %}">{{profile.name}}</a>
+                  <small class="text-muted">{{ answer.date_created|date:"Y/m/d"}} {{ answer.date_created|time:"H:i" }}</small>
+                  {% if answer.score > -1 %}
+                  <small class="text-muted float-right mr-1" href="#">Elért pontszám: {{ answer.score }}</small>
+                  {% else %}
+                  <small class="text-muted float-right mr-1" href="#">Nincsen lepontozva</small>
+                  {% endif %}
+                </div>
+                {{ answer.media }}
+                <h2><a class="article-title" href="#">{{ answer.title }}</a></h2>
+                <p class="article-content">{{ answer.answer|safe }}</p> 
+              </div>
+            </article>
+        </fieldset>
+  </div>
+{% endblock content %}

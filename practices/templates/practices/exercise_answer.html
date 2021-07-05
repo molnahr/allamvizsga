@@ -1,0 +1,56 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-6">
+
+      
+        {% csrf_token %}
+       
+            <article class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <h3> Megoldás: {{ Exercise.title }}</h3>
+                  
+                  <small class="text-muted" href="#">Feladat szintje: {{ Exercise.level }}</small>
+                </div>
+                <h2><a class="article-title" href="#">{{ i.title }}</a></h2>
+                {{ Exercise.media }}
+                <p class="article-content">{{ Exercise.final_answer|safe }}</p>
+                <p class="article-content">{{ e }}</p>
+              </div>
+            </article>
+        
+
+  </div>
+
+
+<div class="col-md-6">
+    <div class="content-section">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Álltalad megadott válasz</legend>
+          {% for i in Answer %}
+            <article class="media content-section">
+              <div class="media-body">
+                <div class="article-metadata">
+                  <a class="mr-2"  href="{% url 'student_profile' Profile.id %}">{{Profile.name}}</a>
+                  <small class="text-muted">{{ i.date_created|date:"Y/m/d"}} {{ i.date_created|time:"H:i" }}</small>
+                  {% if i.score > -1 %}
+                  <small class="text-muted float-right mr-1" href="#">Elért pontszám: {{ i.score }}</small>
+                  {% else %}
+                  <small class="text-muted float-right mr-1" href="#">Nincsen lepontozva</small>
+                  {% endif %}
+                </div>
+                {{ i.media }}
+                <h2><a class="article-title" href="#">{{ i.title }}</a></h2>
+                <p class="article-content">{{ i.answer|safe }}</p> 
+                <a  class="btn btn-success  btn-sm float-right" href="{% url 'my_answers_comment' i.id %}" >Kiértékelés megtekintése</a>
+              </div>
+            </article>
+            {% endfor %}
+        </fieldset>
+    </div>
+  </div>
+{% endblock content %}

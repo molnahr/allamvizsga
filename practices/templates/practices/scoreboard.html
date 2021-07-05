@@ -1,0 +1,54 @@
+{% extends "blog/base.html" %} 
+{% block content %}
+	<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+				<form method="get">
+			</form>
+					<table class="table table-hover" id="myTable">
+					<thead class="thead-dark">
+						<tr>
+
+							<th scope="col">#</th>
+							<th scope="col">Pontszám</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for i in Score %}
+							<tr "table-active">
+								<td scope="row">{{i.id}}</td>
+								<td>{{i.score}}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable( {
+		paging: true,
+        pagingType: "full_numbers",
+        searching: true,
+        autoWidth: true,
+		oLanguage: {
+			oPaginate: {
+			sNext: 'Következő',
+			sPrevious: 'Előző',
+			sLast: 'Utolsó',
+			sFirst: 'Első', 
+		},
+		sZeroRecords: "Nem található ilyen felhaználó",
+		sLengthMenu: "Felhaználók száma oldalanként: _MENU_ ",
+		sInfo: "Oldal: _PAGE_/_PAGES_",
+		sInfoEmpty: "Nem található ilyen felhaználó a mezők között! ",
+		sInfoFiltered: "(Keresés mind a  _MAX_ felhasználó között)",
+		sSearch: 'Keresés',
+    },
+    } );
+} );
+</script>
+{% endblock content %}

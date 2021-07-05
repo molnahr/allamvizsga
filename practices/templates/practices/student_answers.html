@@ -1,0 +1,54 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+   <article class="media content-section">
+          {% csrf_token %}
+          {{ Exercise.media }}
+          <div class="media-body">
+            <div class="article-metadata">
+              <h1 class="text-center">{{ exercise.title }}</h1>
+              <div class="row-6">
+              <small class="text-muted" href="#">Feladat szintje: {{ exercise.level }}</small>
+              </div>
+               <div class="row-6">
+              <small class="text-muted" href="#">Feladat típusa: {{ exercise.exercise_type }}</small>
+                </div>
+              <div class="row-6">
+              <small class="text-muted" href="#">Elérhető maximum pontszám: {{ exercise.score }}</small>
+             </div>
+            </div>
+             <p class="article-content">{{ exercise.description|safe }}</p>
+            {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-2">Megoldott feladatok</legend>
+
+                   {% for i in answer %}
+                    {% for e in i.exercise.all %}
+                    {% for p in i.user_profile.all %}
+           
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{% url 'student_profile' p.id %}">{{ p.name }}</a>
+              <small class="text-muted">{{ i.date_created|date:"Y/m/d" }}  {{ i.date_created|time:"H:i" }}</small>
+              {% if i.score > -1 %}
+                  <small class="text-muted float-right" href="#">Elért pontszám: {{ i.score }}</small>
+                  {% else %}
+                  <small class="text-muted float-right" href="#">Nincsen lepontozva</small>
+                  {% endif %}
+            </div>
+             {% csrf_token %}
+            {{ i.media }}
+             <p class="article-content">{{ i.answer|safe }}</p>
+            <a  class="btn btn-success  btn-sm float-right" href="{% url 'add_score_to_answer_teacher' i.id p.id%}" >Kiértékelés</a>
+          </div>
+        </article>
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
+          </fieldset>
+    </div>
+     </article>
+            </div>
+        </div>
+{% endblock content %}

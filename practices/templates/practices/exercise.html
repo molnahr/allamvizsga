@@ -1,0 +1,105 @@
+{% extends "blog/base.html" %} 
+{% block content %}
+
+
+<br>
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+				<form method="get">
+			<form method="get">
+				{% comment %} {{myFilter.form}}
+<tr><th><label for="id_title">Cím:</label></th><td><input class="form-control" type="text" name="title" id="id_title"></td></tr>
+<tr><th><label for="id_level">Szint:</label></th><td><select class="form-control" name="level" id="id_level">
+  <option value="" selected>---------</option>
+
+  <option value="Könnyű">Könnyű</option>
+
+  <option value="Közepes">Közepes</option>
+
+  <option value="Nehéz">Nehéz</option>
+
+</select></td></tr>
+<tr><th><label for="id_exercise_type">Típus:</label></th><td><select class="form-control" name="exercise_type" id="id_exercise_type">
+  <option value="" selected>---------</option>
+
+  <option value="Verem">Verem</option>
+
+  <option value="Sor">Sor</option>
+
+  <option value="Csatolt Lista">Csatolt Lista</option>
+
+  <option value="Mohó algoritmus">Mohó algoritmus</option>
+
+  <option value="Rekurzió">Rekurzió</option>
+
+  <option value="Dinamikus programozás">Dinamikus programozás</option>
+
+  <option value="Visszalépéses keresés">Visszalépéses keresés</option>
+
+  <option value="Gráfok">Gráfok</option>
+
+</select></td></tr>
+
+<tr></tr>
+<div class="col text-center">
+				<button text-align="center" class="btn btn-primary btn-lg  mt-2 float-right" type="submit">Keresés</button>
+			</div> {% endcomment %}
+			</form>
+					<table class="table table-hover" id="myTable">
+					<thead class="thead-dark">
+						<tr>
+							<th>Cím</th>
+							<th>Szint</th>
+							<th>Típus</th>
+							<th>Pont</th>
+							<th>Frissítés</th>
+							<th>Törlés</th>
+							<th>Megoldás</th>
+							<th>Válaszok</th>
+						</tr>
+						</thead>
+						<tbody>
+
+						{% for i in Exercises %}
+							<tr>
+								<td>{{i.title}}</td>
+								<td>{{i.level}}</td>
+								<td>{{i.exercise_type}}</td>
+                				<td>{{i.score}}</td>
+								<td><a class="btn btn-sm btn-info" href="{% url 'update_exercise' i.id %}">Frissítés</a></td>
+								<td><a class="btn btn-sm btn-danger" href="{% url 'delete_exercise' i.id %}">Törlés</a></td>
+								<td><a class="btn btn-sm btn-success" href="{% url 'add_answer_exercise' i.id %}">Megoldás</a></td>
+								<td><a class="btn btn-sm btn-warning" href="{% url 'all_answer_exercise' i.id %}">Válaszok</a></td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable( {
+		paging: true,
+        pagingType: "full_numbers",
+        searching: true,
+        autoWidth: true,
+		oLanguage: {
+			oPaginate: {
+			sNext: 'Következő',
+			sPrevious: 'Előző',
+			sLast: 'Utolsó',
+			sFirst: 'Első', 
+		},
+		sZeroRecords: "Nem található ilyen feladat",
+		sLengthMenu: "Elemek száma oldalanként: _MENU_ ",
+		sInfo: "Oldal: _PAGE_/_PAGES_",
+		sInfoEmpty: "Nem található ilyen feladat a mezők között! ",
+		sInfoFiltered: "(Keresés mind a  _MAX_ bejegyzés között)",
+		sSearch: 'Keresés',
+    },
+    } );
+} );
+</script>
+{% endblock content %}
