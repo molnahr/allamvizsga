@@ -21,8 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #eredeti
-#SECRET_KEY = 'exhlfdat&vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
-SECRET_KEY = 'exhlfdat2vfum(-34*c2uroi(($ww(yo$9pv98=e6p^gl(-eoj'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -89,11 +88,6 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'allamvizsga_1',
-        'USER': 'molnar',
-        'PASSWORD': 'Alma12345',
-        'HOST': 'database-1.c32kmeqmsa6x.us-east-2.rds.amazonaws.com',
         'PORT': '5432'
     }
 }
@@ -148,19 +142,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL = 'login'
 
-#SMTP Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ujjelszokodolj@gmail.com'
-EMAIL_HOST_PASSWORD = 'UjJelszoKodolj8!'
-
-#S3 BUCKETS CONFIG
-# Azert kell, hogy féneképeket tudjunk feltölteni az aws-re, s ne helyileg legyenek tárolva
-AWS_ACCESS_KEY_ID = 'AKIA5QUGXR5SBNOPY7UP'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'molnar-allamvizsga-bucket'
 
 
 AWS_S3_FILE_OVERWRITE = False
