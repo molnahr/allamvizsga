@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Csatlakozz hozzánk!</legend>
+                <div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
+                Felhasználónév<span class="asteriskField">*</span> </label> <div class=""> <input type="text" name="username" maxlength="150" autofocus class="textinput textInput form-control" required id="id_username"> <small id="hint_id_username" class="form-text text-muted">Kötelető. Kevesebb, mint 150 karakter. Csak betűk, számjegyek és @ /. / + / - / _.</small> </div> </div> <div id="div_id_email" class="form-group"> <label for="id_email" class=" requiredField">
+                E-mail cím<span class="asteriskField">*</span> </label> <div class=""> <input type="email" name="email" class="emailinput form-control" required id="id_email"> <small id="hint_id_email" class="form-text text-muted">Hiteles email cím megadása.</small> </div> </div> <div id="div_id_password1" class="form-group"> <label for="id_password1" class=" requiredField">
+                Jelszó<span class="asteriskField">*</span> </label> <div class=""> <input type="password" name="password1" autocomplete="new-password" class="textinput textInput form-control" required id="id_password1"> <small id="hint_id_password1" class="form-text text-muted"><ul><li>Jelszava nem lehet túl hasonló a többi személyes adatához.</li><li>Jelszavának legalább 8 karakterből kell állnia.</li><li>Jelszava nem lehet gyakran használt jelszó.</li><li>Jelszava nem lehet teljesen numerikus.</li></ul></small> </div> </div> <div id="div_id_password2" class="form-group"> <label for="id_password2" class=" requiredField">
+                Jelszó hitelesítés<span class="asteriskField">*</span> </label> <div class=""> <input type="password" name="password2" autocomplete="new-password" class="textinput textInput form-control" required id="id_password2"> <small id="hint_id_password2" class="form-text text-muted">Az ellenőrzéshez írja be ugyanazt a jelszót, mint korábban.</small> </div> </div>
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Regisztráció</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Van már felhasználói fókja? <a class="ml-2" href="{% url 'login' %}">Bejelentkezés</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

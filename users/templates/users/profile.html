@@ -1,0 +1,54 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">Felhasználónév: {{ user.username }}</h2>
+          <h4 class="text-secondary">E-mail cím: {{ user.email }}</h4>
+          <p class="text-secondary">Pontszám: {{ user.profile.score }}</p>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Profil információk</legend>
+              {% comment %} {{ u_form|crispy }}
+              {{ p_form|crispy }} {% endcomment %}
+
+<div id="div_id_username" class="form-group">
+  <label for="id_username" class=" requiredField">Felhasználónév
+   <span class="asteriskField">*</span> 
+  </label> 
+  <div class=""> 
+    <input type="text" name="username" value={{ user.username }} maxlength="150" class="textinput textInput form-control" required id="id_username"> <small id="hint_id_username" class="form-text text-muted">Kötelező. Kevesebb, mint 150 karakter. Csak betűk, számjegyek és @ /. / + / - / _.</small> 
+  </div> 
+</div> 
+
+ <div id="div_id_email" class="form-group"> 
+ <label for="id_email" class=" requiredField">E-mail cím
+ <span class="asteriskField">*</span> 
+ </label> 
+ <div class=""> 
+ <input type="email" name="email" value={{ user.email }} class="emailinput form-control" required id="id_email"> </div> </div>
+
+              
+
+<div id="div_id_image" class="form-group"> 
+<label for="id_image" class=" requiredField">Fénykép
+<span class="asteriskField">*</span>
+</label> 
+<div class="">Jelenlegi profilkép: <a href="{{ user.profile.image.url }}">{{ user.profile.image }}</a><br>
+Megváltoztatás:
+<input type="file" name="image" accept="image/*" class="clearablefileinput form-control" id="id_image"> </div> </div>
+
+
+
+          </fieldset>
+          <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">Frissítés</button>
+          </div>
+      </form>
+    </div>
+{% endblock content %}
