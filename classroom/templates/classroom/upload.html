@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+ {% load static %}{% block title %} Az Osztály Neve {% endblock %} {% block content %}
+
+<form action="/processing/" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="exampleInputEmail1">Az Osztály Neve </label>
+        <input type="text" name="class_name" class="form-control" id="cardtitle" aria-describedby="emailHelp"
+            placeholder="Adj egy találó nevet az osztályod számára!" required>
+        <small id="emailHelp" class="form-text text-muted">Egy rövid és tömör cím mindig jó választás.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Létrehozás</button>
+</form>
+
+
+{% endblock %}

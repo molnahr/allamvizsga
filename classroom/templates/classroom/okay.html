@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %} {% load static %}
+{% block title %}
+{% for classroom in classrooms %} {% if classroom.code == pswd %}
+{{classroom.classname}}
+{% endif %} {% endfor %}
+{% endblock %}
+{% block content %}
+
+{% for classroom in classrooms %} {% if classroom.code == pswd %}
+
+<div class="container ">
+    <div class="card mb-3 mt-3">
+        <div class="card-body">
+            <h5 class="card-title text-uppercase">Osztály neve: {{ classroom.classname }}</h5>
+            <h5 class="card-title text-uppercase">Osztály neve: {{ classroom.code }}</h5>
+            <h7 class="card-title text">Tanár: {{ classroom.creator }}</h7>
+            <p class="card-text">dfsgfdsgdsfgdfgsdfgd dfgvsd fdsfg dfsg fdsg sfdg sdfg fdsg dsfg sdfg sdfg sdf</p>
+        <p class="card-text"><small class="text-muted">fdgdsfgdsfgsdf fdgdfs gfd g</small></p> 
+        </div>
+    </div>
+</div>
+<!-- <h2>ClassName : {{ classroom.classname }} </h2> -->
+{% endif %} {% endfor %} {% endblock %}

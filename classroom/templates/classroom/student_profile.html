@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load auth_extras %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading"> {{ profile.name }}</h2>
+          <h3 class="text-secondary">Összpontszám: {{ profile.score }}</h3>
+        </div>
+      </div>
+          {% csrf_token %}
+          <fieldset class="form-group">
+              <legend class="border-bottom mb-2">Megoldott feladatok</legend>
+
+                   {% for i in answer %}
+                    {% for e in i.exercise.all %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+               <a class="mr-2"  href="{% url 'exercise_answer' e.id %}">{{e}}</a>
+                  <small class="text-muted">{{ i.date_created|date:"Y/m/d"}} {{ i.date_created|time:"H:i" }}</small>
+                  {% if i.score > -1 %}
+                  <small class="text-muted float-right" href="#">Elért pontszám: {{ i.score }}</small>
+                  {% else %}
+                  <small class="text-muted float-right" href="#">Nincsen lepontozva</small>
+                  {% endif %}
+            </div>
+            <h2><a class="article-title" href="#">{{ i.title }}</a></h2>
+            <p class="article-content">{{ i.answer|safe }}</p>
+             {% if request.user|has_group:"student" %}
+             <a  class="btn btn-info btn-sm float-right" href="{% url 'solve_exercise' e.id %}">Megoldás ismét</a>
+             <a  class="btn btn-success btn-sm float-right mr-1" href="{% url 'my_answers_comment' i.id %}">Kiértékelés megtekintése</a>
+             {% else %}
+             <a  class="btn btn-success  btn-sm float-right" href="{% url 'add_score_to_answer_teacher' i.id profile.id%}" >Kiértékelés</a>
+           {%endif%}
+          </div>
+        </article>
+    {% endfor %}
+    {% endfor %}
+  </fieldset>
+  </div>
+{% endblock content %}

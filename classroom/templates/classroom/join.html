@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %} 
+{% block title %} Csatlakozz!! {% endblock %} 
+{% block content %}
+
+<form action="." method="post">
+    {% csrf_token %}
+
+
+    {{form.as_p}}
+
+    <button type="submit" class="btn btn-primary">Csatlakozás</button>
+</form>
+{% endblock %}>

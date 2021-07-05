@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %} 
+{% block content %}
+
+<section id="classroom">
+	<div class="container">
+		<div class="row">
+		{% for i in my_class %}
+			<div class="col-md-4">
+				<div class="card text-center">
+					<img src="{{i.image.url}}" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title"> {{i.classname}} </h5>
+						<p class="card-text"> {{i.code}} </p>
+						<a href="{% url 'all_students' i.id %}"> Megtekintés </a>
+					</div>
+				</div>
+			</div>	
+			{% endfor %}		
+
+		</div>
+	</div>
+</section>
+
+
+
+{% comment %} 
+<br>
+
+
+
+
+
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<h5>Osztálytermek</h5>
+				</div>
+				<div class="card card-body">
+					<table class="table">
+						<tr>
+							<th>Megnevezés</th>
+							<th>Kód</th>
+						</tr>
+
+						{% for i in my_class %}
+							<tr>
+								<td>{{i.classname}}</td>
+								<td>{{i.code}}</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+				</div>
+			</div>
+		</div> {% endcomment %}
+
+{% endblock content %}

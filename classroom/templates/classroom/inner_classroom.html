@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %} 
+{% load static %}
+{% block content %}
+{% load auth_extras %}
+<section id="classroom">
+	<div class="container">
+		<div class="row">
+		{% for i in students %}
+			<div class="col-md-3">
+				<div class="card text-center">
+					<img src="{{i.image.url}}" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">{{i.name}} </h5>
+						<p class="card-text">Elért pontszám: {{i.score}} </p>
+						{% if request.user|has_group:"teacher" %}
+						<a href="{% url 'student_profile' i.id %}"> Profil </a>
+						{% endif %}
+					</div>
+				</div>
+			</div>	
+			{% endfor %}		
+
+		</div>
+	</div>
+</section>
+
+
+{% endblock content %}

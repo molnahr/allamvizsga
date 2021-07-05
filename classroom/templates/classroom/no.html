@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %} {% load static %} {% block title %} {% for classroom in classrooms %}
+{% if classroom.passcod.passcode == pswd %} {% filter upper %} {{ classroom.classname }} {% endfilter %} {% endif %}
+{% endfor %} {% endblock %}
+
+<!-- Block body -->
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    <p class="text-center">
+    <div class="alert alert-{{messages.level_tag}} alert-dismissible text-center" role="alert">
+        {{messages.message}}
+    </div>
+    </p>
+</ul>
+{% endif %}
+
+{% comment %} <p align="center">We're sorry to see this :(</p> {% endcomment %}
+
+
+
+<div>
+    <div class="card-body">
+        <h5 class="card-title text-center font-italic">Sajnálom, nem található Osztály az alábbi jelszóval!</h5>
+    </div>
+</div>
+{% endblock %}
